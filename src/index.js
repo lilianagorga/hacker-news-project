@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+require('./main.scss');
 
 const API_BASE_URL = process.env.API_BASE_URL;
 const MAX_NEWS_ITEMS = 10;
