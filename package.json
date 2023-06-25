@@ -4,7 +4,9 @@
   "description": "This is a web application developed to democratize the dissemination of tech news by utilizing the Hacker News service. The application retrieves the latest news from Hacker News API and displays the title, link, and date of each news item.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production",
+    "start": "API_BASE_URL=https://hacker-news.firebaseio.com/v0 npm run build"
   },
   "repository": {
     "type": "git",
