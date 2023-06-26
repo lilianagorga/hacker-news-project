@@ -1,4 +1,4 @@
-const path = require('path');
+const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -9,12 +9,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 
-module.exports = merge(commonConfig, {
+module.exports =  merge(commonConfig, {
   mode: 'production',
   devtool: 'source-map',
   output: {
     filename: '[name].[contenthash].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: resolve(__dirname, 'dist'),
   },
   optimization: {
     minimizer: [

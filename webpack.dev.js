@@ -1,4 +1,4 @@
-const path = require('path');
+const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 const commonConfig = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,7 +9,7 @@ module.exports = merge(commonConfig, {
   devtool: 'eval-source-map',
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: resolve(__dirname, 'dist'),
   },
   plugins: [
     new HtmlWebpackPlugin({

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
-require('./main.scss');
+import './main.scss';
 
 const API_BASE_URL = process.env.API_BASE_URL;
 const MAX_NEWS_ITEMS = 10;
@@ -8,22 +8,24 @@ const MAX_NEWS_ITEMS = 10;
 let newsIds = [];
 let displayedNewsItems = [];
 
-function fetchNewsIds() {
-  return axios.get(`${API_BASE_URL}/newstories.json`)
-    .then(response => response.data.slice(0, MAX_NEWS_ITEMS))
-    .catch(error => {
-      console.error('Error fetching news IDs:', error);
-      return [];
-    });
+async function fetchNewsIds() {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/newstories.json`);
+    return response.data.slice(0, MAX_NEWS_ITEMS);
+  } catch (error) {
+    console.error('Error fetching news IDs:', error);
+    return [];
+  }
 }
 
-function fetchNewsDetails(newsId) {
-  return axios.get(`${API_BASE_URL}/item/${newsId}.json`)
-    .then(response => response.data)
-    .catch(error => {
-      console.error('Error fetching news details:', error);
-      return null;
-    });
+async function fetchNewsDetails(newsId) {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/item/${newsId}.json`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching news details:', error);
+    return null;
+  }
 }
 
 function renderNewsItem(newsItem) {
