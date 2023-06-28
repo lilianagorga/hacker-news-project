@@ -1,6 +1,7 @@
 node_modules
+package-lock.json
 dist
 .vscode
-package-lock.json
 .firebase
 firebase-debug-log
+.github
