@@ -6,24 +6,26 @@ const API_BASE_URL = process.env.API_BASE_URL;
 const MAX_NEWS_ITEMS = 10;
 
 let newsIds = [];
-let displayedNewsItems = [];
+let loadedNewsItems = 0;
 
-function fetchNewsIds() {
-  return axios.get(`${API_BASE_URL}/newstories.json`)
-    .then(response => response.data.slice(0, MAX_NEWS_ITEMS))
-    .catch(error => {
-      console.error('Error fetching news IDs:', error);
-      return [];
-    });
+async function fetchNewsIds() {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/newstories.json`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching news IDs:', error);
+    return [];
+  }
 }
 
-function fetchNewsDetails(newsId) {
-  return axios.get(`${API_BASE_URL}/item/${newsId}.json`)
-    .then(response => response.data)
-    .catch(error => {
-      console.error('Error fetching news details:', error);
-      return null;
-    });
+async function fetchNewsDetails(newsId) {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/item/${newsId}.json`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching news details:', error);
+    return null;
+  }
 }
 
 function renderNewsItem(newsItem) {
@@ -45,19 +47,18 @@ function renderNewsItem(newsItem) {
   newsItemElement.appendChild(linkElement);
 
   const dateElement = document.createElement('div');
+  dateElement.classList.add('news-item-date'); // Aggiunge la classe per lo stile
   dateElement.textContent = new Date(newsItem.time * 1000).toLocaleString();
   newsItemElement.appendChild(dateElement);
 
   newsList.appendChild(newsItemElement);
-  displayedNewsItems.push(newsItemElement);
 }
 
 function renderNewsItems() {
-  displayedNewsItems.forEach(item => item.remove());
-  displayedNewsItems = [];
+  const newsList = document.getElementById('news-list');
+  newsList.innerHTML = ''; // Rimuove le news precedenti
 
-  const newsIdsToFetch = newsIds.slice(0, MAX_NEWS_ITEMS);
-  newsIds = newsIds.slice(MAX_NEWS_ITEMS);
+  const newsIdsToFetch = newsIds.slice(loadedNewsItems, loadedNewsItems + MAX_NEWS_ITEMS);
 
   const fetchNewsPromises = newsIdsToFetch.map(newsId => fetchNewsDetails(newsId));
   Promise.all(fetchNewsPromises)
@@ -68,15 +69,22 @@ function renderNewsItems() {
         }
       });
 
-      if (newsIds.length > 0) {
-        document.getElementById('load-more-btn').style.display = 'block';
+      loadedNewsItems += MAX_NEWS_ITEMS;
+
+      if (loadedNewsItems < newsIds.length) {
+        toggleButtonDisplay(false);
       } else {
-        document.getElementById('load-more-btn').style.display = 'none';
+        toggleButtonDisplay(true);
       }
     })
     .catch(error => {
       console.error('Error rendering news items:', error);
     });
+}
+
+function toggleButtonDisplay(hide) {
+  const loadMoreButton = document.getElementById('load-more-btn');
+  loadMoreButton.style.display = hide ? 'none' : 'block';
 }
 
 function onLoadMoreClick() {
@@ -85,10 +93,10 @@ function onLoadMoreClick() {
 
 document.getElementById('load-more-btn').addEventListener('click', onLoadMoreClick);
 
-// Fetch initial news IDs and render the first batch of news items
 fetchNewsIds()
   .then(ids => {
     newsIds = ids;
+    toggleButtonDisplay(false);
     renderNewsItems();
   })
   .catch(error => {
