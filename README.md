@@ -33,7 +33,7 @@ This is a web application developed to democratize the dissemination of tech new
 
 ### Start the development server:
 * npm start
-* The application will be accessible at https://hacker-news-s2i-project.web.app/index.html
+* The application will be accessible at https://hacker-news-s2i-project.web.app
 
 ### Build the production version:
 * npm run build
