@@ -17,8 +17,9 @@ This is a web application developed to democratize the dissemination of tech new
 
 1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/lilianagorga/hacker-news-project.git
+```bash
+git clone https://github.com/lilianagorga/hacker-news-project.git
+```
 
 ### Navigate to the project directory: 
 * cd hacker-news-tech-app
