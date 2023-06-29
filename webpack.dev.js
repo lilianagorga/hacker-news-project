@@ -13,7 +13,7 @@ module.exports = merge(commonConfig, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/template.html',
+      template: './src/templates/index.html',
     }),
     new Dotenv({
       path: './.env.dev',

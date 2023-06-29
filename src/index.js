@@ -1,5 +1,5 @@
 import axios from 'axios';
-import './main.scss';
+import './assets/styles/main.scss';
 
 const API_BASE_URL = process.env.API_BASE_URL;
 const MAX_NEWS_ITEMS = 10;
@@ -46,7 +46,7 @@ function renderNewsItem(newsItem) {
   newsItemElement.appendChild(linkElement);
 
   const dateElement = document.createElement('div');
-  dateElement.classList.add('news-item-date'); // Aggiunge la classe per lo stile
+  dateElement.classList.add('news-item-date');
   dateElement.textContent = new Date(newsItem.time * 1000).toLocaleString();
   newsItemElement.appendChild(dateElement);
 
@@ -55,7 +55,7 @@ function renderNewsItem(newsItem) {
 
 function renderNewsItems() {
   const newsList = document.getElementById('news-list');
-  newsList.innerHTML = ''; // Rimuove le news precedenti
+  newsList.innerHTML = '';
 
   const newsIdsToFetch = newsIds.slice(loadedNewsItems, loadedNewsItems + MAX_NEWS_ITEMS);
 
