@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _ from 'lodash';
 import './main.scss';
 
 const API_BASE_URL = process.env.API_BASE_URL;

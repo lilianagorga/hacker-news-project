@@ -7,11 +7,10 @@ This is a web application developed to democratize the dissemination of tech new
 - Displays a list of the latest news items with their titles, links, and dates.
 - Fetches the list of news IDs from the Hacker News API.
 - Retrieves detailed information for each news item by calling the Hacker News API.
-- Implements pagination to load more news items in batches.
+- Implements button to load more news items in batches.
 - Uses environment variables for configuration.
 - Utilizes Webpack for bundling the application.
 - Makes API requests using Axios.
-- Handles data manipulation and rendering using Lodash.
 
 ## Installation
 
@@ -32,10 +31,12 @@ git clone https://github.com/lilianagorga/hacker-news-project.git
 * Create a .env.prod file for the production environment.
 * Set the API_BASE_URL variable in both files to the appropriate Hacker News API base URL.
 
-### Start the development server:
-* npm start
-* The application will be accessible at https://hacker-news-s2i-project.web.app
-
 ### Build the production version:
 * npm run build
 * The optimized and minified production build will be generated in the dist directory.
+
+### Start the development server:
+* npm start
+
+### Live Deploy:
+* The application will be accessible at https://hacker-news-s2i-project.web.app

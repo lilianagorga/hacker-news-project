@@ -28,9 +28,9 @@ module.exports = merge(commonConfig, {
       {
         test: /\.scss$/,
         use: [
-          'style-loader', //inject styles into dom
-          'css-loader',  // turns css into commonjs
-          'sass-loader' // turns sass into css
+          'style-loader', 
+          'css-loader',  
+          'sass-loader' 
         ],
       }
     ]
